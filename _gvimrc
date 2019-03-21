@@ -1,0 +1,47 @@
+au GUIEnter * simalt ~x "最大化して起動
+set guifont=MS_Gothic:h15:b "font
+colorscheme koehler "カラースキーム
+syntax enable " 構文に色を付ける
+gui "透明化
+set transparency=200 "透明度
+"半角英数,ひらがな入力時のカーソルの色
+if has('multi_byte_ime')
+  highlight Cursor guifg=NONE guibg=DarkCyan
+  highlight CursorIM guifg=NONE guibg=Orange
+endif
+hi Visual         term=reverse cterm=reverse gui=reverse guibg=Black
+
+
+""""""""""""""""""""""""""""""
+" 挿入モード時、ステータスラインの色を変更
+""""""""""""""""""""""""""""""
+let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
+
+if has('syntax')
+  augroup InsertHook
+    autocmd!
+    autocmd InsertEnter * call s:StatusLine('Enter')
+    autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+  if a:mode == 'Enter'
+    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+    silent exec g:hi_insert
+  else
+    highlight clear StatusLine
+    silent exec s:slhlcmd
+  endif
+endfunction
+
+function! s:GetHighlight(hi)
+  redir => hl
+  exec 'highlight '.a:hi
+  redir END
+  let hl = substitute(hl, '[\r\n]', '', 'g')
+  let hl = substitute(hl, 'xxx', '', '')
+  return hl
+endfunction
+""""""""""""""""""""""""""""""
