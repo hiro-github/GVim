@@ -34,6 +34,8 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 let g:netrw_altv = 1 "'v'で右側に開く(デフォルトは左)
 let g:netrw_alto = 1 "'o'で下側に開く(デフォルトは上)
 let g:netrw_winsize = 85 "分割のときに85%のサイズ
+let g:netrw_liststyle = 3 "ツリー表示
+let g:netrw_preview   = 1 "プレビューを垂直分割
 
 "------------------------------------------------
 " 検索系
@@ -113,6 +115,35 @@ set autoindent " 改行時に前の行のインデントを継続する
 set smartindent " 前の行の構文をチェックし次の行のインデントを増減する
 set shiftwidth=4 " smartindentで増減する幅
 set linebreak "単語単位で折り返し
+
+"------------------------------------------------
+"スペルチェック
+"------------------------------------------------
+set spelllang=en,cjk
+
+fun! s:SpellConf()
+  redir! => syntax
+  silent syntax
+  redir END
+
+  set spell
+
+  if syntax =~? '/<comment\>'
+    syntax spell default
+    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent containedin=Comment contained
+  else
+    syntax spell toplevel
+    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent
+  endif
+
+  syntax cluster Spell add=SpellNotAscii,SpellMaybeCode
+endfunc
+
+augroup spell_check
+  autocmd!
+  autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
+augroup END
+
 
 "------------------------------------------------
 "NeoComplete
