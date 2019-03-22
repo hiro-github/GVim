@@ -12,6 +12,7 @@ if has('vim_starting')
       NeoBundle 'inkarkat/vim-mark'
       NeoBundle 'inkarkat/vim-ingo-library' "for vim-mark
       NeoBundle 'Shougo/neocomplete.vim'
+      NeoBundle 'tpope/vim-fugitive'
     call neobundle#end()
 endif
 filetype plugin indent on
@@ -90,12 +91,6 @@ nnoremap ,g yiw:vim <C-r><S-0> % <Bar> cw<CR><S-g><C-w>k<C-o>
 set list  " 不可視文字を表示する
 set listchars=tab:>-,trail:.  " タブを >--- 半スペを . で表示する
 set tabstop=4
-"全角スペースの可視化
-"augroup highlightIdegraphicSpace
-"  autocmd!
-"  autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
-"  autocmd VimEnter,WinEnter * match IdeographicSpace /　/
-"augroup END
 
 "------------------------------------------------
 "Others
@@ -113,6 +108,8 @@ set autoindent " 改行時に前の行のインデントを継続する
 set smartindent " 前の行の構文をチェックし次の行のインデントを増減する
 set shiftwidth=4 " smartindentで増減する幅
 set linebreak "単語単位で折り返し
+set fileencoding=utf-8 "ファイル保存時の文字コード設定
+set fileencodings=utf-8,cp932 "ファイル読込時の文字コード設定
 
 "------------------------------------------------
 "NeoComplete
