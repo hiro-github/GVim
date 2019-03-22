@@ -1,10 +1,10 @@
-au GUIEnter * simalt ~x "Å‘å‰»‚µ‚Ä‹N“®
+au GUIEnter * simalt ~x "æœ€å¤§åŒ–ã—ã¦èµ·å‹•
 set guifont=MS_Gothic:h15:b "font
-colorscheme koehler "ƒJƒ‰[ƒXƒL[ƒ€
-syntax enable " \•¶‚ÉF‚ğ•t‚¯‚é
-gui "“§–¾‰»
-set transparency=200 "“§–¾“x
-"”¼Šp‰p”,‚Ğ‚ç‚ª‚È“ü—Í‚ÌƒJ[ƒ\ƒ‹‚ÌF
+colorscheme koehler "ã‚«ãƒ©ãƒ¼ã‚¹ã‚­ãƒ¼ãƒ 
+syntax enable " æ§‹æ–‡ã«è‰²ã‚’ä»˜ã‘ã‚‹
+gui "é€æ˜åŒ–
+set transparency=200 "é€æ˜åº¦
+"åŠè§’è‹±æ•°,ã²ã‚‰ãŒãªå…¥åŠ›æ™‚ã®ã‚«ãƒ¼ã‚½ãƒ«ã®è‰²
 if has('multi_byte_ime')
   highlight Cursor guifg=NONE guibg=DarkCyan
   highlight CursorIM guifg=NONE guibg=Orange
@@ -13,7 +13,7 @@ hi Visual         term=reverse cterm=reverse gui=reverse guibg=Black
 
 
 """"""""""""""""""""""""""""""
-" ‘}“üƒ‚[ƒhAƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚ÌF‚ğ•ÏX
+" æŒ¿å…¥ãƒ¢ãƒ¼ãƒ‰æ™‚ã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã®è‰²ã‚’å¤‰æ›´
 """"""""""""""""""""""""""""""
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
 
