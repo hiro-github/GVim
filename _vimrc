@@ -12,6 +12,7 @@ if has('vim_starting')
       NeoBundle 'inkarkat/vim-mark'
       NeoBundle 'inkarkat/vim-ingo-library' "for vim-mark
       NeoBundle 'Shougo/neocomplete.vim'
+      NeoBundle 'tpope/vim-fugitive'
     call neobundle#end()
 endif
 filetype plugin indent on
@@ -31,25 +32,23 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 "------------------------------------------------
 "Netrw
 "------------------------------------------------
-let g:netrw_altv = 1 "'v'‚Å‰E‘¤‚ÉŠJ‚­(ƒfƒtƒHƒ‹ƒg‚Í¶)
-let g:netrw_alto = 1 "'o'‚Å‰º‘¤‚ÉŠJ‚­(ƒfƒtƒHƒ‹ƒg‚Íã)
-let g:netrw_winsize = 85 "•ªŠ„‚Ì‚Æ‚«‚É85%‚ÌƒTƒCƒY
-let g:netrw_liststyle = 3 "ƒcƒŠ[•\¦
-let g:netrw_preview   = 1 "ƒvƒŒƒrƒ…[‚ğ‚’¼•ªŠ„
+let g:netrw_altv = 1 "'v'ã§å³å´ã«é–‹ã(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯å·¦)
+let g:netrw_alto = 1 "'o'ã§ä¸‹å´ã«é–‹ã(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ä¸Š)
+let g:netrw_winsize = 85 "åˆ†å‰²ã®ã¨ãã«85%ã®ã‚µã‚¤ã‚º
 
 "------------------------------------------------
-" ŒŸõŒn
+" æ¤œç´¢ç³»
 "------------------------------------------------
-set ignorecase "ŒŸõ•¶š—ñ‚ª¬•¶š‚Æ‚«,‘å•¶š¬•¶š‚ğ‹æ•Ê‚È‚­ŒŸõ
-set smartcase  "ŒŸõ•¶š—ñ‚ª‘å•¶š‚Ì‚Æ‚«,‹æ•Ê‚µ‚ÄŒŸõ
-set incsearch  "ŒŸõ•¶š—ñ“ü—Í‚É‡Ÿ‘ÎÛ•¶š—ñ‚Éƒqƒbƒg‚³‚¹‚é
-set wrapscan   "ŒŸõ‚ÉÅŒã‚Ü‚Ås‚Á‚½‚çÅ‰‚É–ß‚é
-set hlsearch   "ŒŸõŒê‚ğƒnƒCƒ‰ƒCƒg•\¦
-"ESC˜A‘Å‚ÅƒnƒCƒ‰ƒCƒg‰ğœ
+set ignorecase "æ¤œç´¢æ–‡å­—åˆ—ãŒå°æ–‡å­—ã¨ã,å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ãªãæ¤œç´¢
+set smartcase  "æ¤œç´¢æ–‡å­—åˆ—ãŒå¤§æ–‡å­—ã®ã¨ã,åŒºåˆ¥ã—ã¦æ¤œç´¢
+set incsearch  "æ¤œç´¢æ–‡å­—åˆ—å…¥åŠ›æ™‚ã«é †æ¬¡å¯¾è±¡æ–‡å­—åˆ—ã«ãƒ’ãƒƒãƒˆã•ã›ã‚‹
+set wrapscan   "æ¤œç´¢æ™‚ã«æœ€å¾Œã¾ã§è¡Œã£ãŸã‚‰æœ€åˆã«æˆ»ã‚‹
+set hlsearch   "æ¤œç´¢èªã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆè¡¨ç¤º
+"ESCé€£æ‰“ã§ãƒã‚¤ãƒ©ã‚¤ãƒˆè§£é™¤
 nnoremap <ESC><ESC> :nohl<CR>
 
 "------------------------------------------------
-"windowŠÖ˜A
+"windowé–¢é€£
 "------------------------------------------------
 nnoremap + ,
 nnoremap , <Nop>
@@ -67,83 +66,50 @@ nnoremap ,, <C-w><
 nnoremap ,. <C-w>>
 
 "------------------------------------------------
-"ƒL[Š„‚è“–‚Ä
+"ã‚­ãƒ¼å‰²ã‚Šå½“ã¦
 "------------------------------------------------
 nnoremap j gj
 nnoremap k gk
-set nobackup "ƒoƒbƒNƒAƒbƒvƒtƒ@ƒCƒ‹‚ğì‚ç‚È‚¢
-nnoremap gn :<C-u>tabnew<CR> "V‚µ‚¢ƒ^ƒu
-"ƒrƒWƒ…ƒAƒ‹ƒ‚[ƒh‚É$‚Å‰üs‚ğŠÜ‚ß‚È‚¢
+set nobackup "ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œã‚‰ãªã„
+nnoremap gn :<C-u>tabnew<CR> "æ–°ã—ã„ã‚¿ãƒ–
+"ãƒ“ã‚¸ãƒ¥ã‚¢ãƒ«ãƒ¢ãƒ¼ãƒ‰æ™‚ã«$ã§æ”¹è¡Œã‚’å«ã‚ãªã„
 vnoremap $ $h
-"‰üs‚ğŠÜ‚ß‚È‚¢ƒRƒs[
+"æ”¹è¡Œã‚’å«ã‚ãªã„ã‚³ãƒ”ãƒ¼
 nnoremap yu 0v$hy
-"ÅIs‚Ìs––‚Ü‚ÅˆÚ“®
+"æœ€çµ‚è¡Œã®è¡Œæœ«ã¾ã§ç§»å‹•
 nnoremap G G$
 xnoremap G G$
-"Ÿ‚ÌŒó•â‚ÉˆÚ“®‚µ‚È‚¢
+"æ¬¡ã®å€™è£œã«ç§»å‹•ã—ãªã„
 "nnoremap F *N
 nnoremap F yiwk$/<C-r><S-0><CR>
 "grep
 nnoremap ,g yiw:vim <C-r><S-0> % <Bar> cw<CR><S-g><C-w>k<C-o>
 
 "------------------------------------------------
-"‰Â‹‰»,FŠÖ˜A
+"å¯è¦–åŒ–,è‰²é–¢é€£
 "------------------------------------------------
-set list  " •s‰Â‹•¶š‚ğ•\¦‚·‚é
-set listchars=tab:>-,trail:.  " ƒ^ƒu‚ğ >--- ”¼ƒXƒy‚ğ . ‚Å•\¦‚·‚é
+set list  " ä¸å¯è¦–æ–‡å­—ã‚’è¡¨ç¤ºã™ã‚‹
+set listchars=tab:>-,trail:.  " ã‚¿ãƒ–ã‚’ >--- åŠã‚¹ãƒšã‚’ . ã§è¡¨ç¤ºã™ã‚‹
 set tabstop=4
-"‘SŠpƒXƒy[ƒX‚Ì‰Â‹‰»
-"augroup highlightIdegraphicSpace
-"  autocmd!
-"  autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
-"  autocmd VimEnter,WinEnter * match IdeographicSpace /@/
-"augroup END
 
 "------------------------------------------------
 "Others
 "------------------------------------------------
 set viminfo='1000,f1,<500 "viminfo
-set noswapfile "ƒXƒƒbƒvƒtƒ@ƒCƒ‹‚ğì‚ç‚È‚¢
-set noundofile ".un~ ƒtƒ@ƒCƒ‹‚ğì‚ç‚È‚¢
-set scrolloff=1 "ƒJ[ƒ\ƒ‹ŠO‚É•\¦‚·‚és”‚Ì—]—T
-set foldmethod=marker "{{{‚Æ}}}‚Å,ˆÍ‚Ü‚ê‚½”ÍˆÍ‚ğÜ‚èô‚Ş
-set visualbell t_vb= "ƒr[ƒv‰¹‚·‚×‚Ä‚ğ–³Œø‚É‚·‚é
-set noerrorbells "ƒGƒ‰[ƒƒbƒZ[ƒW‚Ì•\¦‚Éƒr[ƒv‚ğ–Â‚ç‚³‚È‚¢
-set autochdir "©“®“I‚ÉƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğ•ÏX
-set number "s”‚Ì•\¦
-set autoindent " ‰üs‚É‘O‚Ìs‚ÌƒCƒ“ƒfƒ“ƒg‚ğŒp‘±‚·‚é
-set smartindent " ‘O‚Ìs‚Ì\•¶‚ğƒ`ƒFƒbƒN‚µŸ‚Ìs‚ÌƒCƒ“ƒfƒ“ƒg‚ğ‘Œ¸‚·‚é
-set shiftwidth=4 " smartindent‚Å‘Œ¸‚·‚é•
-set linebreak "’PŒê’PˆÊ‚ÅÜ‚è•Ô‚µ
-
-"------------------------------------------------
-"ƒXƒyƒ‹ƒ`ƒFƒbƒN
-"------------------------------------------------
-set spelllang=en,cjk
-
-fun! s:SpellConf()
-  redir! => syntax
-  silent syntax
-  redir END
-
-  set spell
-
-  if syntax =~? '/<comment\>'
-    syntax spell default
-    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent containedin=Comment contained
-  else
-    syntax spell toplevel
-    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent
-  endif
-
-  syntax cluster Spell add=SpellNotAscii,SpellMaybeCode
-endfunc
-
-augroup spell_check
-  autocmd!
-  autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
-augroup END
-
+set noswapfile "ã‚¹ãƒ¯ãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œã‚‰ãªã„
+set noundofile ".un~ ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œã‚‰ãªã„
+set scrolloff=1 "ã‚«ãƒ¼ã‚½ãƒ«å¤–ã«è¡¨ç¤ºã™ã‚‹è¡Œæ•°ã®ä½™è£•
+set foldmethod=marker "{{{ã¨}}}ã§,å›²ã¾ã‚ŒãŸç¯„å›²ã‚’æŠ˜ã‚Šç•³ã‚€
+set visualbell t_vb= "ãƒ“ãƒ¼ãƒ—éŸ³ã™ã¹ã¦ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+set noerrorbells "ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¡¨ç¤ºæ™‚ã«ãƒ“ãƒ¼ãƒ—ã‚’é³´ã‚‰ã•ãªã„
+set autochdir "è‡ªå‹•çš„ã«ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å¤‰æ›´
+set number "è¡Œæ•°ã®è¡¨ç¤º
+set autoindent " æ”¹è¡Œæ™‚ã«å‰ã®è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’ç¶™ç¶šã™ã‚‹
+set smartindent " å‰ã®è¡Œã®æ§‹æ–‡ã‚’ãƒã‚§ãƒƒã‚¯ã—æ¬¡ã®è¡Œã®ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’å¢—æ¸›ã™ã‚‹
+set shiftwidth=4 " smartindentã§å¢—æ¸›ã™ã‚‹å¹…
+set linebreak "å˜èªå˜ä½ã§æŠ˜ã‚Šè¿”ã—
+set fileencoding=utf-8 "ãƒ•ã‚¡ã‚¤ãƒ«ä¿å­˜æ™‚ã®æ–‡å­—ã‚³ãƒ¼ãƒ‰è¨­å®š
+set fileencodings=utf-8,cp932 "ãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼æ™‚ã®æ–‡å­—ã‚³ãƒ¼ãƒ‰è¨­å®š
 
 "------------------------------------------------
 "NeoComplete
