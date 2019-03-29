@@ -1,0 +1,26 @@
+git に関するコマンド等の情報
+
+〇Permission denied (publickey). が表示された時の対処
+$ eval "$(ssh-agent -s)"
+$ ssh-add ~/.ssh/id_rsa_github
+
+〇git pull
+$ git pull origin master
+
+〇git push
+$ git push origin add-new-file
+
+〇git log のグラフ的な表示
+$ git log --pretty=format:"%h %s" --graph
+
+〇gitで管理しているファイル一覧
+$ git ls-files
+
+〇git diff (add済みファイルとワーキングディレクトリとの比較)
+$ git diff
+
+〇git diff (コミット)
+$ git diff --cached
+
+〇git add の取り消し
+$ git reset HEAD

@@ -86,13 +86,6 @@ nnoremap F yiwk$/<C-r><S-0><CR>
 nnoremap ,g yiw:vim <C-r><S-0> % <Bar> cw<CR><S-g><C-w>k<C-o>
 
 "------------------------------------------------
-"可視化,色関連
-"------------------------------------------------
-set list  " 不可視文字を表示する
-set listchars=tab:>-,trail:.  " タブを >--- 半スペを . で表示する
-set tabstop=4
-
-"------------------------------------------------
 "Others
 "------------------------------------------------
 set viminfo='1000,f1,<500 "viminfo
@@ -110,6 +103,34 @@ set shiftwidth=4 " smartindentで増減する幅
 set linebreak "単語単位で折り返し
 set fileencoding=utf-8 "ファイル保存時の文字コード設定
 set fileencodings=utf-8,cp932 "ファイル読込時の文字コード設定
+
+"------------------------------------------------
+"スペルチェック 日本語エラー無視
+"------------------------------------------------
+set spelllang=en,cjk
+
+fun! s:SpellConf()
+  redir! => syntax
+  silent syntax
+  redir END
+
+  set spell
+
+  if syntax =~? '/<comment\>'
+    syntax spell default
+    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent containedin=Comment contained
+  else
+    syntax spell toplevel
+    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent
+  endif
+
+  syntax cluster Spell add=SpellNotAscii,SpellMaybeCode
+endfunc
+
+augroup spell_check
+  autocmd!
+  autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
+augroup END
 
 "------------------------------------------------
 "NeoComplete
