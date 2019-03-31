@@ -13,8 +13,7 @@ set tabstop=4
 
 "全角スペースをハイライト
 function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse 
-guifg=DarkMagenta
+    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
    
 if has('syntax')
