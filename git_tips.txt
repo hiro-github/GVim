@@ -5,7 +5,7 @@ $ eval "$(ssh-agent -s)"
 $ ssh-add ~/.ssh/id_rsa_github
 
 〇git pull
-$ git pull origin master
+$ git pull origin add-new-file
 
 〇git push
 $ git push origin add-new-file
