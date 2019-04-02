@@ -1,11 +1,10 @@
 git に関するコマンド等の情報
 
 〇Permission denied (publickey). が表示された時の対処
-$ eval "$(ssh-agent -s)"
-$ ssh-add ~/.ssh/id_rsa_github
+$ eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_github
 
 〇git pull
-$ git pull origin master
+$ git pull origin add-new-file
 
 〇git push
 $ git push origin add-new-file

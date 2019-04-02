@@ -103,6 +103,7 @@ set shiftwidth=4 " smartindentで増減する幅
 set linebreak "単語単位で折り返し
 set fileencoding=utf-8 "ファイル保存時の文字コード設定
 set fileencodings=utf-8,cp932 "ファイル読込時の文字コード設定
+set diffopt=vertical "vimdiffのとき縦に分割
 
 "------------------------------------------------
 "スペルチェック 日本語エラー無視
