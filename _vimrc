@@ -8,6 +8,7 @@ if has('vim_starting')
       NeoBundleFetch 'Shougo/neobundle.vim'
       NeoBundle 'Shougo/unite.vim'
       NeoBundle 'Shougo/neomru.vim'
+      NeoBundle 'Shougo/vimfiler.vim'
       NeoBundle 'ujihisa/unite-colorscheme'
       NeoBundle 'inkarkat/vim-mark'
       NeoBundle 'inkarkat/vim-ingo-library' "for vim-mark
@@ -24,10 +25,13 @@ let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 50
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+nnoremap <silent> ,ud :<C-u>Unite directory_mru<CR>
+nnoremap <silent> ,ub :<C-u>Unite bookmark<CR>
+call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
+call unite#custom_default_action('source/directory_mru/directory' , 'vimfiler')
 
 "------------------------------------------------
 "Netrw
@@ -66,7 +70,7 @@ nnoremap ,, <C-w><
 nnoremap ,. <C-w>>
 
 "------------------------------------------------
-"キー割り当て
+"カーソル移動
 "------------------------------------------------
 nnoremap j gj
 nnoremap k gk
@@ -76,6 +80,8 @@ nnoremap gn :<C-u>tabnew<CR> "新しいタブ
 vnoremap $ $h
 "改行を含めないコピー
 nnoremap yu 0v$hy
+"一行ビジュアル選択
+nnoremap yv 0v$
 "最終行の行末まで移動
 nnoremap G G$
 xnoremap G G$
