@@ -34,6 +34,12 @@ call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
 call unite#custom_default_action('source/directory_mru/directory' , 'vimfiler')
 
 "------------------------------------------------
+"vimfiler
+"------------------------------------------------
+nnoremap <silent> ,vf :<C-u>VimFilerBufferDir<CR>
+
+
+"------------------------------------------------
 "Netrw
 "------------------------------------------------
 let g:netrw_altv = 1 "'v'で右側に開く(デフォルトは左)
@@ -88,8 +94,10 @@ xnoremap G G$
 "次の候補に移動しない
 "nnoremap F *N
 nnoremap F yiwk$/<C-r><S-0><CR>
-"grep
-nnoremap ,g yiw:vim <C-r><S-0> % <Bar> cw<CR><S-g><C-w>k<C-o>
+"grep directory
+nnoremap ,gd yiw:vim <C-r><S-0> ** <Bar> cw<CR><S-g><C-w>k<C-o>
+"grep file
+nnoremap ,gt yiw:vim <C-r><S-0> % <Bar> cw<CR><S-g><C-w>k<C-o>
 
 "------------------------------------------------
 "Others
@@ -105,11 +113,12 @@ set autochdir "自動的にカレントディレクトリを変更
 set number "行数の表示
 set autoindent " 改行時に前の行のインデントを継続する
 set smartindent " 前の行の構文をチェックし次の行のインデントを増減する
-set shiftwidth=4 " smartindentで増減する幅
+set shiftwidth=2 " smartindentで増減する幅
 set linebreak "単語単位で折り返し
 set fileencoding=utf-8 "ファイル保存時の文字コード設定
 set fileencodings=utf-8,cp932 "ファイル読込時の文字コード設定
 set diffopt=vertical "vimdiffのとき縦に分割
+:autocmd BufEnter  *.cls :set filetype=vb
 
 "------------------------------------------------
 "スペルチェック 日本語エラー無視
