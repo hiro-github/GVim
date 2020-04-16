@@ -13,6 +13,7 @@ if has('vim_starting')
       NeoBundle 'inkarkat/vim-mark'
       NeoBundle 'inkarkat/vim-ingo-library' "for vim-mark
       NeoBundle 'Shougo/neocomplete.vim'
+      NeoBundle 'Shougo/unite-outline'
       NeoBundle 'tpope/vim-fugitive'
     call neobundle#end()
 endif
@@ -37,6 +38,7 @@ call unite#custom_default_action('source/directory_mru/directory' , 'vimfiler')
 "vimfiler
 "------------------------------------------------
 nnoremap <silent> ,vf :<C-u>VimFilerBufferDir<CR>
+nnoremap <silent> ,vl :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
 
 
 "------------------------------------------------
@@ -93,11 +95,11 @@ nnoremap G G$
 xnoremap G G$
 "次の候補に移動しない
 "nnoremap F *N
-nnoremap F yiwk$/<C-r><S-0><CR>
+nnoremap F yiwk$/<C-r>0<CR>
 "grep directory
-nnoremap ,gd yiw:vim <C-r><S-0> ** <Bar> cw<CR><S-g><C-w>k<C-o>
+nnoremap ,gd yiw:vim <C-r>0 ** <Bar> cw<CR><S-g><C-w>k<C-o>
 "grep file
-nnoremap ,gt yiw:vim <C-r><S-0> % <Bar> cw<CR><S-g><C-w>k<C-o>
+nnoremap ,gt yiw:vim <C-r>0 % <Bar> cw<CR><S-g><C-w>k<C-o>
 
 "------------------------------------------------
 "Others
