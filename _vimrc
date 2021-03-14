@@ -13,8 +13,8 @@ if has('vim_starting')
       NeoBundle 'inkarkat/vim-mark'
       NeoBundle 'inkarkat/vim-ingo-library' "for vim-mark
       NeoBundle 'Shougo/neocomplete.vim'
-      NeoBundle 'Shougo/unite-outline'
       NeoBundle 'tpope/vim-fugitive'
+      "NeoBundle 'deton/jasegment.vim'
     call neobundle#end()
 endif
 filetype plugin indent on
@@ -26,7 +26,7 @@ let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 50
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,uc :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 nnoremap <silent> ,ud :<C-u>Unite directory_mru<CR>
@@ -37,9 +37,36 @@ call unite#custom_default_action('source/directory_mru/directory' , 'vimfiler')
 "------------------------------------------------
 "vimfiler
 "------------------------------------------------
-nnoremap <silent> ,vf :<C-u>VimFilerBufferDir<CR>
+nnoremap <silent> ,vc :<C-u>VimFilerBufferDir<CR>
 nnoremap <silent> ,vl :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
 
+"------------------------------------------------
+"jasegment
+"------------------------------------------------
+let g:jasegment#highlight = 1
+let g:jasegment#model = 'knbc_bunsetu'
+"nmap w <Plug>JaSegmentMoveNW
+"vmap w <Plug>JaSegmentMoveVW
+"nmap b <Plug>JaSegmentMoveNB
+"vmap b <Plug>JaSegmentMoveVW
+
+"------------------------------------------------
+"ctags
+"------------------------------------------------
+nnoremap ,ce :!ctags --excmd=number -R --languages=Basic --langmap=Basic:.frm.bas.cls --Basic-types=-l<CR>
+"nnoremap ,ce :!ctags --input-encoding=utf-8 --input-encoding-java=cp932 --input-encoding-javascript=euc-jp --excmd=number -R --languages=Basic --langmap=Basic:.frm.bas.cls --Basic-types=-l<CR>
+nnoremap ,cl :on<CR>:vsp<CR><C-w>l :exe("tjump ".expand('<cword>'))<CR>
+vnoremap ,cl y:on<CR>:vsp<CR><C-w>l : tjump <C-r>0<CR>
+
+"------------------------------------------------
+"grep
+"------------------------------------------------
+"grep current directory
+nnoremap ,gl :on<CR>yiw:vim <C-r>0 **/*.txt **/*.bas **/*.cls **/*.frm <Bar> cw<CR><S-g><C-w>k<C-o>
+vnoremap ,gl y:on<CR>:vim <C-r>0 **/.txt **/*.bas **/*.cls **/*.frm <Bar> cw<CR><S-g><C-w>k<C-o>
+nnoremap ,gd :vim  **/*.txt **/*.bas **/*.cls **/*.frm <Bar> cw <C-b><S-Right><Right>
+"grep file
+vnoremap ,gf y:vim <C-r>0 % <Bar> cw<CR><S-g><C-w>k<C-o>
 
 "------------------------------------------------
 "Netrw
@@ -89,17 +116,14 @@ vnoremap $ $h
 "改行を含めないコピー
 nnoremap yu 0v$hy
 "一行ビジュアル選択
-nnoremap yv 0v$
+nnoremap yv 0v$h
 "最終行の行末まで移動
 nnoremap G G$
 xnoremap G G$
 "次の候補に移動しない
-"nnoremap F *N
+"nnoremap <SID>dummyMarkSearchNext <Plug>MarkSearchNext
+"nnoremap * yiwk$/<C-r>0<CR>
 nnoremap F yiwk$/<C-r>0<CR>
-"grep directory
-nnoremap ,gd yiw:vim <C-r>0 ** <Bar> cw<CR><S-g><C-w>k<C-o>
-"grep file
-nnoremap ,gt yiw:vim <C-r>0 % <Bar> cw<CR><S-g><C-w>k<C-o>
 
 "------------------------------------------------
 "Others
@@ -120,7 +144,9 @@ set linebreak "単語単位で折り返し
 set fileencoding=utf-8 "ファイル保存時の文字コード設定
 set fileencodings=utf-8,cp932 "ファイル読込時の文字コード設定
 set diffopt=vertical "vimdiffのとき縦に分割
+set tags=./tags;,tags;
 :autocmd BufEnter  *.cls :set filetype=vb
+:autocmd BufEnter  *.frm :set filetype=vb
 
 "------------------------------------------------
 "スペルチェック 日本語エラー無視
